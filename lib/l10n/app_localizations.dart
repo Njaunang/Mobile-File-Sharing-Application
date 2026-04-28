@@ -524,6 +524,60 @@ abstract class AppLocalizations {
   /// **'Connect'**
   String get connect;
 
+  /// No description provided for @webShare.
+  ///
+  /// In en, this message translates to:
+  /// **'WEB SHARE'**
+  String get webShare;
+
+  /// No description provided for @webServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Web Server'**
+  String get webServer;
+
+  /// No description provided for @hostFilesOnLocalWeb.
+  ///
+  /// In en, this message translates to:
+  /// **'Host files on local web'**
+  String get hostFilesOnLocalWeb;
+
+  /// No description provided for @scanToAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'SCAN TO ACCESS'**
+  String get scanToAccess;
+
+  /// No description provided for @securityPin.
+  ///
+  /// In en, this message translates to:
+  /// **'SECURITY PIN'**
+  String get securityPin;
+
+  /// No description provided for @openThisLinkInYourPCBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Open this link in your PC browser'**
+  String get openThisLinkInYourPCBrowser;
+
+  /// No description provided for @sharedFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'SHARED FILES'**
+  String get sharedFiles;
+
+  /// No description provided for @addFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Files'**
+  String get addFiles;
+
+  /// No description provided for @noFilesAddedToWebShareYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No files added to web share yet'**
+  String get noFilesAddedToWebShareYet;
+
   /// No description provided for @errorGettingLocalIP.
   ///
   /// In en, this message translates to:

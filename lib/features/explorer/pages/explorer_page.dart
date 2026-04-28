@@ -4,6 +4,8 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:local_sharer/core/constants/app_colors.dart';
 import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/explorer/models/file_item.dart';
+import 'package:local_sharer/features/home/logic/web_provider.dart';
+import 'package:local_sharer/features/home/pages/web_share_page.dart';
 import 'package:local_sharer/features/transfer/pages/discovery_page.dart';
 import 'package:local_sharer/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -448,24 +450,64 @@ class _ExplorerPageState extends State<ExplorerPage> {
       child: SafeArea(
         child: Row(
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${provider.selectedFiles.length} ${AppLocalizations.of(context)!.itemSelected}",
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "${provider.selectedFiles.length} ${AppLocalizations.of(context)!.itemSelected}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  "${AppLocalizations.of(context)!.total}: ${_formatTotalSize(provider.selectedFiles)}",
-                  style: const TextStyle(color: Colors.white70, fontSize: 12),
-                ),
-              ],
+                  Text(
+                    "${AppLocalizations.of(context)!.total}: ${_formatTotalSize(provider.selectedFiles)}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ],
+              ),
             ),
-            const Spacer(),
+            const SizedBox(width: 12),
+            OutlinedButton(
+              onPressed: () {
+                final webProvider = context.read<WebProvider>();
+                for (var f in provider.selectedFiles) {
+                  webProvider.addFile(File(f.path));
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      "${provider.selectedFiles.length} files added to Web Share",
+                    ),
+                    action: SnackBarAction(
+                      label: "VIEW",
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const WebSharePage(),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+                provider.clearSelection();
+              },
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                side: const BorderSide(color: Colors.white24),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text("WEB"),
+            ),
+            const SizedBox(width: 8),
             ElevatedButton(
               onPressed: () {
                 final files = provider.selectedFiles

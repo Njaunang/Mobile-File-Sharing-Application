@@ -230,6 +230,35 @@ class AppLocalizationsFr extends AppLocalizations {
   String get connect => 'Appareil manuel';
 
   @override
+  String get webShare => 'PARTAGE WEB';
+
+  @override
+  String get webServer => 'Serveur Web';
+
+  @override
+  String get hostFilesOnLocalWeb => 'Fichiers hôtes sur le web local';
+
+  @override
+  String get scanToAccess => 'NUMÉRISER POUR ACCÉDER';
+
+  @override
+  String get securityPin => 'PIN DE SÉCURITÉ';
+
+  @override
+  String get openThisLinkInYourPCBrowser =>
+      'Ouvrez ce lien dans votre navigateur PC';
+
+  @override
+  String get sharedFiles => 'FICHIERS PARTAGÉS';
+
+  @override
+  String get addFiles => 'Ajouter des fichiers';
+
+  @override
+  String get noFilesAddedToWebShareYet =>
+      'Aucun fichier n\'a encore été ajouté au partage web.';
+
+  @override
   String get errorGettingLocalIP =>
       'Erreur lors de la récupération de l\'adresse IP locale';
 

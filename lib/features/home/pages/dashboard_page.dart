@@ -6,6 +6,8 @@ import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/explorer/models/file_item.dart';
 import 'package:local_sharer/features/explorer/pages/explorer_page.dart';
 import 'package:local_sharer/features/home/logic/home_provider.dart';
+import 'package:local_sharer/features/home/logic/web_provider.dart';
+import 'package:local_sharer/features/home/pages/web_share_page.dart';
 import 'package:local_sharer/features/transfer/pages/receiver_page.dart';
 import 'package:local_sharer/l10n/app_localizations.dart';
 import 'package:local_sharer/providers/locale_provider.dart';
@@ -58,7 +60,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   const SizedBox(height: 16),
                   _buildCategoryGrid(),
                   const SizedBox(height: 32),
-                  _buildPcTransferCard(isDark),
+                  _buildWebShareCard(isDark),
                   const SizedBox(height: 16),
                   _buildRecentStorageCard(isDark),
                   const SizedBox(height: 20),
@@ -292,114 +294,77 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildPcTransferCard(bool isDark) {
-    final homeProvider = context.watch<HomeProvider>();
+  Widget _buildWebShareCard(bool isDark) {
+    final webProvider = context.watch<WebProvider>();
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: homeProvider.isRunning
-            ? AppColors.primary.withValues(alpha: 0.1)
-            : (isDark ? AppColors.slate : Colors.white),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: homeProvider.isRunning
-              ? AppColors.primary
-              : Colors.grey.withValues(alpha: 0.1),
-        ),
+    return InkWell(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const WebSharePage()),
       ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: homeProvider.isRunning
-                      ? AppColors.primary
-                      : AppColors.textLight.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: HugeIcon(
-                  icon: HugeIcons.strokeRoundedComputerArrowDown,
-                  color: homeProvider.isRunning
-                      ? Colors.white
-                      : AppColors.textLight,
-                  size: 24,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Connect to PC",
-                      style: GoogleFonts.plusJakartaSans(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      homeProvider.isRunning
-                          ? "Server is Active"
-                          : "Transfer via Browser/WinSCP",
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Switch(
-                value: homeProvider.isRunning,
-                activeThumbColor: AppColors.primary,
-                onChanged: (val) => homeProvider.toggleServer(),
-              ),
-            ],
+      borderRadius: BorderRadius.circular(32),
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: webProvider.isRunning
+              ? AppColors.primary.withValues(alpha: 0.1)
+              : (isDark ? AppColors.slate : Colors.white),
+          borderRadius: BorderRadius.circular(32),
+          border: Border.all(
+            color: webProvider.isRunning
+                ? AppColors.primary
+                : Colors.grey.withValues(alpha: 0.1),
           ),
-          if (homeProvider.isRunning) ...[
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Divider(height: 1, color: Colors.black12),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: webProvider.isRunning
+                    ? AppColors.primary
+                    : AppColors.textLight.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: HugeIcon(
+                icon: HugeIcons.strokeRoundedGlobal,
+                color: webProvider.isRunning ? Colors.white : AppColors.textLight,
+                size: 24,
+              ),
             ),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "SERVER ADDRESS",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-                      Text(
-                        homeProvider.serverAddress,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 16,
-                          color: AppColors.primary,
-                        ),
-                      ),
-                    ],
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Web Share (PC)",
+                    style: GoogleFonts.plusJakartaSans(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () => _showConnectionGuide(homeProvider),
-                  icon: const Icon(
-                    Icons.help_outline,
-                    color: AppColors.primary,
+                  Text(
+                    webProvider.isRunning
+                        ? "Server Active: ${webProvider.serverAddress}"
+                        : "Access files via any browser",
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 12,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+            const HugeIcon(
+              icon: HugeIcons.strokeRoundedArrowRight01,
+              color: AppColors.textLight,
+              size: 20,
             ),
           ],
-        ],
+        ),
       ),
     ).animate().fadeIn(delay: 500.ms);
   }

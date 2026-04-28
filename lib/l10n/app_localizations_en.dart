@@ -227,6 +227,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connect => 'Connect';
 
   @override
+  String get webShare => 'WEB SHARE';
+
+  @override
+  String get webServer => 'Web Server';
+
+  @override
+  String get hostFilesOnLocalWeb => 'Host files on local web';
+
+  @override
+  String get scanToAccess => 'SCAN TO ACCESS';
+
+  @override
+  String get securityPin => 'SECURITY PIN';
+
+  @override
+  String get openThisLinkInYourPCBrowser => 'Open this link in your PC browser';
+
+  @override
+  String get sharedFiles => 'SHARED FILES';
+
+  @override
+  String get addFiles => 'Add Files';
+
+  @override
+  String get noFilesAddedToWebShareYet => 'No files added to web share yet';
+
+  @override
   String get errorGettingLocalIP => 'Error getting local IP';
 
   @override

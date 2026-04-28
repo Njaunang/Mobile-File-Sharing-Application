@@ -27,7 +27,9 @@ The application features a complete redesign with a focus on professional aesthe
 - **Breadcrumb Navigation:** Easy folder jumping and path tracking.
 
 ### 3. PC Connection (Mobile-to-PC)
-- **Universal FTP Server:** Built-in server allowing any PC to connect via standard FTP clients (WinSCP, FileZilla) or Windows File Explorer.
+- **Secure Web Share (NEW):** Host a modern, responsive web portal directly from your phone. Any PC on the same network can access it via a standard browser using a **4-digit Security PIN**.
+- **Universal FTP Server:** Built-in server allowing legacy connection via standard FTP clients (WinSCP, FileZilla) or Windows File Explorer.
+- **QR Access:** Scan the on-screen QR code to instantly open the web share portal on other devices.
 - **Integrated Connection Guide:** A step-by-step tutorial inside the app to help users connect their computers effortlessly.
 - **Emulator Support:** Fully compatible with ADB port forwarding for development and testing.
 
@@ -54,12 +56,164 @@ The application features a complete redesign with a focus on professional aesthe
 
 To take **Local Sharer** even further, we are looking at the following improvements:
 
-1.  **🌍 Multi-Language Support (l10n):** Full internationalization to make the app accessible globally (In Progress).
-2.  **🌐 Web-Based Transfer:** Host a tiny web server on the phone so PCs can download files via a standard web browser (no FTP software needed).
-3.  **📜 Transfer History:** A dedicated section to track all previous transfers with timestamps and file details.
-4.  **🔒 Biometric Security:** Option to lock the app or specific folders with Fingerprint or Face ID.
-5.  **📦 Smart Compression:** Automatically ZIP large folders on the fly before sending to save time and bandwidth.
-6.  **👥 Group Sharing:** Support for sending files to multiple devices simultaneously.
+## 2. 🕘 Transfer History Module
+
+Create a dedicated **Transfer History section** inside the application.
+
+It must store and display:
+
+* file name
+* sender device
+* receiver device
+* transfer type (send / receive)
+* timestamp
+* file size
+* status (success / failed / cancelled)
+
+Include:
+
+* clean timeline UI
+* searchable history
+* filter by date / device / status
+* persistent local storage database
+
+Recommended:
+
+* Drift / SQLite 
+
+---
+
+## 3. 🔐 Biometric Security
+
+Implement advanced security with biometric authentication.
+
+Add:
+
+* app lock with fingerprint where available
+* Face ID support where available
+* PIN Code where available
+* folder-level protection
+* secure authentication before access to sensitive folders
+
+Requirements:
+
+* use secure Flutter packages
+* store security preferences safely
+* avoid bypass vulnerabilities
+* include fallback PIN / password option
+
+Focus strongly on:
+
+* security best practices
+* future-proof code
+* maintainable authentication architecture
+
+---
+
+## 4. 📦 Smart Compression
+
+Implement automatic compression for large folders before transfer.
+
+Requirements:
+
+* detect large folders automatically
+* compress to ZIP in real time before sending
+* show compression progress indicator
+* reduce bandwidth and transfer time
+* preserve folder structure
+
+Please ensure:
+
+* no UI blocking
+* asynchronous background processing
+* memory-efficient compression logic
+* strong error handling
+
+---
+
+## 5. 👥 Group Sharing
+
+Implement support for sending files to **multiple devices simultaneously**.
+
+Features:
+
+* discover multiple devices on same network
+* multi-device selection UI
+* send one file to many devices at once
+* parallel transfer processing
+* individual progress per device
+
+Important:
+
+* excellent backend concurrency management
+* no race conditions
+* no duplicate packet issues
+* scalable architecture
+
+---
+
+# 🎨 UI / UX Requirements
+
+The UI and UX must be **perfect, modern, and highly professional**.
+
+I want:
+
+* smooth animations
+* polished transitions
+* clean modern cards
+* premium file manager style interface
+* responsive design
+* intuitive navigation
+* beautiful progress indicators
+* professional typography
+* modern icons (HugeIcons)
+
+The design should feel close to:
+
+* Xender
+* ShareIt
+* AirDrop style experience
+
+---
+
+# 🛡 Backend / Security Requirements
+
+This is extremely important.
+
+The backend logic must be:
+
+* clean
+* scalable
+* maintainable
+* highly secure
+* free from known vulnerabilities
+* robust against future security threats
+
+Please pay special attention to:
+
+* secure file handling
+* socket safety
+* authentication flow
+* server lifecycle
+* concurrency
+* null safety
+* error prevention
+* memory leaks
+* production-level architecture
+
+I want **excellent code quality with minimal risk of future bugs or security issues**.
+
+Please structure the code professionally with clear separation of:
+
+* UI
+* services
+* models
+* controllers / providers
+* utilities
+* storage
+* security
+
+and include explanations of the architecture choices. **👥 Group Sharing:** Support for sending files to multiple devices simultaneously.
 
 ---
 
