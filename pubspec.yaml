@@ -1,0 +1,67 @@
+name: local_sharer
+description: "A professional file sharing app."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.9
+  
+  # Core Functionality
+  ftp_server: ^2.3.2
+  hugeicons: ^1.1.6
+  google_fonts: ^6.2.1
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  permission_handler: ^12.0.1
+  intl: ^0.20.2
+  open_filex: ^4.7.0
+  device_info_plus: ^13.1.0
+  
+  # State & UI
+  provider: ^6.1.2
+  shared_preferences: ^2.5.5
+  flutter_animate: ^4.5.2
+  shimmer: ^3.0.0
+  
+  # Network & Utilities
+  wifi_iot: ^0.3.19+2
+  nsd: ^5.0.1
+  mobile_scanner: ^6.0.0
+  qr_flutter: ^4.1.0
+  toast_notification: ^1.0.0
+
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: assets/icons/icon.png
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+  
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/font/Roboto-Regular.ttf
+        - asset: assets/font/Roboto-Bold.ttf
+          weight: 700
