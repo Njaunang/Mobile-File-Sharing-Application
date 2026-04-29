@@ -203,10 +203,6 @@ class _DiscoveryPageState extends State<DiscoveryPage> {
                 color: color,
               ),
             ),
-          // IconButton(
-          //   icon: Icon(Icons.close, size: 16, color: color),
-          //   onPressed: () => provider.stop(),
-          // ),
         ],
       ),
     ).animate().fadeIn().slideY(begin: -0.2, end: 0);

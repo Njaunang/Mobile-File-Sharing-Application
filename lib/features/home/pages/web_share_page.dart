@@ -345,10 +345,10 @@ class WebSharePage extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         trailing: IconButton(
-          icon: const Icon(
-            Icons.remove_circle_outline,
-            color: Colors.redAccent,
+          icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedRemoveCircle,
             size: 20,
+            color: Colors.redAccent,
           ),
           onPressed: () => provider.removeFile(file),
         ),

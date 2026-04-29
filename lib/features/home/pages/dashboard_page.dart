@@ -132,13 +132,13 @@ class _DashboardPageState extends State<DashboardPage> {
             MaterialPageRoute(builder: (context) => const HistoryPage()),
           ),
         ),
-        const SizedBox(width: 12),
-        _quickActionCard(
-          AppLocalizations.of(context)!.received,
-          HugeIcons.strokeRoundedDownload02,
-          AppColors.secondary,
-          () {}, // TODO: Implement Received files shortcut
-        ),
+        // const SizedBox(width: 12),
+        // _quickActionCard(
+        //   AppLocalizations.of(context)!.received,
+        //   HugeIcons.strokeRoundedDownload02,
+        //   AppColors.secondary,
+        //   () {}, // TODO: Implement Received files shortcut
+        // ),
       ],
     ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0);
   }
@@ -161,6 +161,7 @@ class _DashboardPageState extends State<DashboardPage> {
             border: Border.all(color: color.withValues(alpha: 0.2)),
           ),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               HugeIcon(icon: icon, color: color, size: 24),
               const SizedBox(width: 12),

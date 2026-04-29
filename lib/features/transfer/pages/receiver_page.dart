@@ -118,7 +118,11 @@ class _ReceiverPageState extends State<ReceiverPage> {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.close, size: 16, color: color),
+            icon: HugeIcon(
+              icon: HugeIcons.strokeRoundedCancel01,
+              size: 16,
+              color: color,
+            ),
             onPressed: () {
               // We should have a way to reset status without stopping broadcast
               // For now, provider.stop() works but resets everything.

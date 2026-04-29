@@ -24,6 +24,15 @@ class HistoryPage extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.history),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: HugeIcon(
+            icon: HugeIcons.strokeRoundedArrowLeft01,
+            color: isDark ? Colors.white : AppColors.textPrimary,
+          ),
+        ),
         actions: [
           if (provider.history.isNotEmpty)
             IconButton(
