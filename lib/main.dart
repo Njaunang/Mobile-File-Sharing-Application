@@ -5,6 +5,7 @@ import 'package:local_sharer/features/home/logic/home_provider.dart';
 import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/home/logic/transfer_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
+import 'package:local_sharer/features/history/logic/history_provider.dart';
 import 'package:local_sharer/features/home/pages/dashboard_page.dart';
 import 'package:local_sharer/l10n/app_localizations.dart';
 import 'package:local_sharer/providers/locale_provider.dart';
@@ -17,8 +18,13 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => ExplorerProvider()),
-        ChangeNotifierProvider(create: (_) => TransferProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
         ChangeNotifierProvider(create: (_) => WebProvider()),
+        ChangeNotifierProxyProvider<HistoryProvider, TransferProvider>(
+          create: (_) => TransferProvider(),
+          update: (_, history, transfer) =>
+              transfer!..updateHistoryProvider(history),
+        ),
       ],
       child: const MainApp(),
     ),

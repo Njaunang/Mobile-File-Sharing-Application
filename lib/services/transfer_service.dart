@@ -41,6 +41,22 @@ class TransferProgress {
   });
 }
 
+class CompletedFile {
+  final String name;
+  final String path;
+  final int size;
+  final bool isIncoming;
+  final String peerName;
+
+  CompletedFile({
+    required this.name,
+    required this.path,
+    required this.size,
+    required this.isIncoming,
+    required this.peerName,
+  });
+}
+
 class TransferService {
   nsd_plugin.Registration? _registration;
   nsd_plugin.Discovery? _discovery;
@@ -51,6 +67,9 @@ class TransferService {
 
   final _progressController = StreamController<TransferProgress>.broadcast();
   Stream<TransferProgress> get progressStream => _progressController.stream;
+
+  final _completedController = StreamController<CompletedFile>.broadcast();
+  Stream<CompletedFile> get completedStream => _completedController.stream;
 
   final Set<Peer> _discoveredPeers = {};
   final String _serviceType = '_localsharer._tcp';
@@ -167,6 +186,7 @@ class TransferService {
     List<File> files,
     String username,
     String password,
+    String deviceName,
   ) async {
     Socket? socket;
     try {
@@ -183,7 +203,12 @@ class TransferService {
       // 1. Auth Handshake
       _log("Sending authentication...");
       socket.write(
-        "${jsonEncode({"type": "auth", "username": username, "password": password})}\n",
+        "${jsonEncode({
+              "type": "auth",
+              "username": username,
+              "password": password,
+              "deviceName": deviceName,
+            })}\n",
       );
 
       // 2. Wait for Auth Response
@@ -286,6 +311,8 @@ class TransferService {
       await socket.flush();
       _log("Client authenticated.");
 
+      final String peerName = authData["deviceName"] ?? "Remote Device";
+
       // 2. Receive Files
       final downloadDir = await _getDownloadDirectory();
 
@@ -322,6 +349,15 @@ class TransferService {
 
         await sink.close();
         _log("File $name received and saved.");
+        
+        // Notify completion
+        _completedController.add(CompletedFile(
+          name: name,
+          path: file.path,
+          size: size,
+          isIncoming: true,
+          peerName: peerName,
+        ));
       }
     } catch (e) {
       _log("Receiver error: $e");

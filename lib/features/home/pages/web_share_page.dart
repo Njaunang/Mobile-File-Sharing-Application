@@ -36,10 +36,10 @@ class WebSharePage extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: Column(
           children: [
-            _buildServerStatusCard(webProvider, isDark),
+            _buildServerStatusCard(context, webProvider, isDark),
             const SizedBox(height: 24),
             if (webProvider.isRunning)
-              _buildConnectionInfo(webProvider, isDark),
+              _buildConnectionInfo(context, webProvider, isDark),
             const SizedBox(height: 24),
             _buildBasketSection(context, webProvider, isDark),
           ],
@@ -48,7 +48,11 @@ class WebSharePage extends StatelessWidget {
     );
   }
 
-  Widget _buildServerStatusCard(WebProvider provider, bool isDark) {
+  Widget _buildServerStatusCard(
+    BuildContext context,
+    WebProvider provider,
+    bool isDark,
+  ) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -93,8 +97,8 @@ class WebSharePage extends StatelessWidget {
                     ),
                     Text(
                       provider.isRunning
-                          ? "Server is Active"
-                          : "Host files on local web",
+                          ? AppLocalizations.of(context)!.serverIsActive
+                          : AppLocalizations.of(context)!.hostFilesOnLocalWeb,
                       style: TextStyle(
                         color: AppColors.textSecondary,
                         fontSize: 13,
@@ -126,7 +130,11 @@ class WebSharePage extends StatelessWidget {
     debugPrint("Please add files to share first");
   }
 
-  Widget _buildConnectionInfo(WebProvider provider, bool isDark) {
+  Widget _buildConnectionInfo(
+    BuildContext context,
+    WebProvider provider,
+    bool isDark,
+  ) {
     return Column(
       children: [
         Container(
@@ -144,7 +152,7 @@ class WebSharePage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "SCAN TO ACCESS",
+                AppLocalizations.of(context)!.scanToAccess,
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.2,
@@ -166,10 +174,14 @@ class WebSharePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              _infoTile("ADDRESS", provider.serverAddress, isDark),
+              _infoTile(
+                AppLocalizations.of(context)!.address,
+                provider.serverAddress,
+                isDark,
+              ),
               const SizedBox(height: 12),
               _infoTile(
-                "SECURITY PIN",
+                AppLocalizations.of(context)!.securityPin,
                 provider.pin,
                 isDark,
                 isHighlight: true,
@@ -179,7 +191,7 @@ class WebSharePage extends StatelessWidget {
         ).animate().fadeIn().scale(),
         const SizedBox(height: 16),
         Text(
-          "Open this link in your PC browser",
+          AppLocalizations.of(context)!.openThisLinkInYourPCBrowser,
           style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
         ),
       ],
@@ -235,7 +247,7 @@ class WebSharePage extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                "SHARED FILES (${provider.basketFiles.length})",
+                "${AppLocalizations.of(context)!.sharedFiles} (${provider.basketFiles.length})",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.plusJakartaSans(
@@ -253,13 +265,13 @@ class WebSharePage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const ExplorerPage()),
                 );
               },
-              child: const Text("Add Files"),
+              child: Text(AppLocalizations.of(context)!.addFiles),
             ),
           ],
         ),
         const SizedBox(height: 12),
         if (provider.basketFiles.isEmpty)
-          _buildEmptyBasket(isDark)
+          _buildEmptyBasket(context, isDark)
         else
           ListView.builder(
             shrinkWrap: true,
@@ -274,7 +286,7 @@ class WebSharePage extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyBasket(bool isDark) {
+  Widget _buildEmptyBasket(BuildContext context, bool isDark) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(40),
@@ -286,7 +298,7 @@ class WebSharePage extends StatelessWidget {
           style: BorderStyle.solid,
         ),
       ),
-      child: const Column(
+      child: Column(
         children: [
           HugeIcon(
             icon: HugeIcons.strokeRoundedFolderOpen,
@@ -295,7 +307,7 @@ class WebSharePage extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            "No files added to web share yet",
+            AppLocalizations.of(context)!.noFilesAddedToWebShareYet,
             style: TextStyle(color: Colors.grey),
           ),
         ],

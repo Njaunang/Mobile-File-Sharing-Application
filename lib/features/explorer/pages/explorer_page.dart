@@ -101,20 +101,21 @@ class _ExplorerPageState extends State<ExplorerPage> {
   }
 
   String _getTitle(ExplorerProvider provider) {
-    if (provider.currentCategory == null) return "Explorer";
+    if (provider.currentCategory == null)
+      return AppLocalizations.of(context)!.explorer;
     switch (provider.currentCategory!) {
       case FileType.image:
         return "Images";
       case FileType.video:
-        return "Videos";
+        return AppLocalizations.of(context)!.videosCategory;
       case FileType.audio:
-        return "Music";
+        return AppLocalizations.of(context)!.musicCategory;
       case FileType.document:
         return "Documents";
       case FileType.apk:
         return "Apps (APKs)";
       case FileType.folder:
-        return "All Files";
+        return AppLocalizations.of(context)!.allFiles;
       default:
         return "Files";
     }
@@ -130,13 +131,13 @@ class _ExplorerPageState extends State<ExplorerPage> {
       },
       {
         'type': FileType.video,
-        'label': 'Videos',
+        'label': AppLocalizations.of(context)!.videosCategory,
         'icon': HugeIcons.strokeRoundedVideo01,
         'color': Colors.purple,
       },
       {
         'type': FileType.audio,
-        'label': 'Music',
+        'label': AppLocalizations.of(context)!.musicCategory,
         'icon': HugeIcons.strokeRoundedMusicNote01,
         'color': Colors.pink,
       },
@@ -154,7 +155,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
       },
       {
         'type': FileType.folder,
-        'label': 'All Files',
+        'label': AppLocalizations.of(context)!.allFiles,
         'icon': HugeIcons.strokeRoundedFolder01,
         'color': Colors.amber,
       },
@@ -280,7 +281,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
                 } else {
                   // Find index in original path
                   final subParts = parts.sublist(1, index + 1);
-                  provider.scanDirectory(rootPath + "/" + subParts.join("/"));
+                  provider.scanDirectory("$rootPath/${subParts.join("/")}");
                 }
               },
               child: Text(
@@ -483,10 +484,10 @@ class _ExplorerPageState extends State<ExplorerPage> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      "${provider.selectedFiles.length} files added to Web Share",
+                      "${provider.selectedFiles.length} ${AppLocalizations.of(context)!.filesAddedToWebShare}",
                     ),
                     action: SnackBarAction(
-                      label: "VIEW",
+                      label: AppLocalizations.of(context)!.view,
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(

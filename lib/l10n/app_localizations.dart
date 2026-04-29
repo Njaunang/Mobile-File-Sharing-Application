@@ -578,6 +578,96 @@ abstract class AppLocalizations {
   /// **'No files added to web share yet'**
   String get noFilesAddedToWebShareYet;
 
+  /// No description provided for @filesAddedToWebShare.
+  ///
+  /// In en, this message translates to:
+  /// **'files added to Web Share'**
+  String get filesAddedToWebShare;
+
+  /// No description provided for @view.
+  ///
+  /// In en, this message translates to:
+  /// **'VIEW'**
+  String get view;
+
+  /// No description provided for @webSharePC.
+  ///
+  /// In en, this message translates to:
+  /// **'Web Share (PC)'**
+  String get webSharePC;
+
+  /// No description provided for @accessFilesViaAnyBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Access files via any browser'**
+  String get accessFilesViaAnyBrowser;
+
+  /// No description provided for @allFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'All Files'**
+  String get allFiles;
+
+  /// No description provided for @imageCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get imageCategory;
+
+  /// No description provided for @musicCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Music'**
+  String get musicCategory;
+
+  /// No description provided for @videosCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get videosCategory;
+
+  /// No description provided for @explorer.
+  ///
+  /// In en, this message translates to:
+  /// **'Explorer'**
+  String get explorer;
+
+  /// No description provided for @internalStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Internal Storage'**
+  String get internalStorage;
+
+  /// No description provided for @noTransferHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No Transfer History'**
+  String get noTransferHistory;
+
+  /// No description provided for @yourRecentTransfersWillAppearHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Your recent transfers will appear here'**
+  String get yourRecentTransfersWillAppearHere;
+
+  /// No description provided for @clearHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear History'**
+  String get clearHistory;
+
+  /// No description provided for @thisWillPermanentlyDeleteAllTransferLogs.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all transfer logs.'**
+  String get thisWillPermanentlyDeleteAllTransferLogs;
+
+  /// No description provided for @storagePermissionsAreRequiredToReceiveFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage permissions are required to receive files.'**
+  String get storagePermissionsAreRequiredToReceiveFiles;
+
   /// No description provided for @errorGettingLocalIP.
   ///
   /// In en, this message translates to:

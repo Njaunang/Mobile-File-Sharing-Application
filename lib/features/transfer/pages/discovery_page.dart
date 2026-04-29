@@ -181,7 +181,7 @@ class _DiscoveryPageState extends State<DiscoveryPage> {
       ),
       child: Row(
         children: [
-          Icon(icon, color: color, size: 20),
+          HugeIcon(icon: icon, color: color, size: 20),
           const SizedBox(width: 12),
           Expanded(
             child: Text(

@@ -33,6 +33,11 @@ The application features a complete redesign with a focus on professional aesthe
 - **Integrated Connection Guide:** A step-by-step tutorial inside the app to help users connect their computers effortlessly.
 - **Emulator Support:** Fully compatible with ADB port forwarding for development and testing.
 
+### 4. 🕘 Transfer History
+- **Persistent Logs:** Dedicated section to track all previous transfers (sent and received).
+- **Timeline UI:** Beautifully organized history with timestamps, file sizes, and status.
+- **Instant Access:** Open received files directly from the history page using `open_filex`.
+
 ---
 
 ## 📖 Usage Guide
@@ -56,44 +61,18 @@ The application features a complete redesign with a focus on professional aesthe
 
 To take **Local Sharer** even further, we are looking at the following improvements:
 
-## 2. 🕘 Transfer History Module
-
-Create a dedicated **Transfer History section** inside the application.
-
-It must store and display:
-
-* file name
-* sender device
-* receiver device
-* transfer type (send / receive)
-* timestamp
-* file size
-* status (success / failed / cancelled)
-
-Include:
-
-* clean timeline UI
-* searchable history
-* filter by date / device / status
-* persistent local storage database
-
-Recommended:
-
-* Drift / SQLite 
-
----
-
 ## 3. 🔐 Biometric Security
 
 Implement advanced security with biometric authentication.
 
 Add:
 
-* app lock with fingerprint where available
+* app lock with fingerprint  where available
 * Face ID support where available
 * PIN Code where available
 * folder-level protection
 * secure authentication before access to sensitive folders
+* note user can choose his lock method he can choose fingerprint, face id, or pin code
 
 Requirements:
 

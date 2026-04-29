@@ -5,6 +5,7 @@ import 'package:local_sharer/core/constants/app_colors.dart';
 import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/explorer/models/file_item.dart';
 import 'package:local_sharer/features/explorer/pages/explorer_page.dart';
+import 'package:local_sharer/features/history/pages/history_page.dart';
 import 'package:local_sharer/features/home/logic/home_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
 import 'package:local_sharer/features/home/pages/web_share_page.dart';
@@ -126,38 +127,52 @@ class _DashboardPageState extends State<DashboardPage> {
           AppLocalizations.of(context)!.history,
           HugeIcons.strokeRoundedClock01,
           AppColors.primary,
+          () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HistoryPage()),
+          ),
         ),
         const SizedBox(width: 12),
         _quickActionCard(
           AppLocalizations.of(context)!.received,
           HugeIcons.strokeRoundedDownload02,
           AppColors.secondary,
+          () {}, // TODO: Implement Received files shortcut
         ),
       ],
     ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0);
   }
 
-  Widget _quickActionCard(String title, dynamic icon, Color color) {
+  Widget _quickActionCard(
+    String title,
+    dynamic icon,
+    Color color,
+    VoidCallback onTap,
+  ) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withValues(alpha: 0.2)),
-        ),
-        child: Row(
-          children: [
-            HugeIcon(icon: icon, color: color, size: 24),
-            const SizedBox(width: 12),
-            Text(
-              title,
-              style: GoogleFonts.plusJakartaSans(
-                fontWeight: FontWeight.bold,
-                color: color,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: color.withValues(alpha: 0.2)),
+          ),
+          child: Row(
+            children: [
+              HugeIcon(icon: icon, color: color, size: 24),
+              const SizedBox(width: 12),
+              Text(
+                title,
+                style: GoogleFonts.plusJakartaSans(
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -328,7 +343,9 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               child: HugeIcon(
                 icon: HugeIcons.strokeRoundedGlobal,
-                color: webProvider.isRunning ? Colors.white : AppColors.textLight,
+                color: webProvider.isRunning
+                    ? Colors.white
+                    : AppColors.textLight,
                 size: 24,
               ),
             ),
@@ -338,7 +355,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Web Share (PC)",
+                    AppLocalizations.of(context)!.webSharePC,
                     style: GoogleFonts.plusJakartaSans(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -346,8 +363,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   Text(
                     webProvider.isRunning
-                        ? "Server Active: ${webProvider.serverAddress}"
-                        : "Access files via any browser",
+                        ? "${AppLocalizations.of(context)!.serverIsActive}: ${webProvider.serverAddress}"
+                        : AppLocalizations.of(
+                            context,
+                          )!.accessFilesViaAnyBrowser,
                     style: TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,

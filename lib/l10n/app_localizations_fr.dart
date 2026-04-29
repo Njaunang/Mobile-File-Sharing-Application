@@ -259,6 +259,55 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucun fichier n\'a encore été ajouté au partage web.';
 
   @override
+  String get filesAddedToWebShare => 'fichiers ajoutés au partage Web';
+
+  @override
+  String get view => 'VOIR';
+
+  @override
+  String get webSharePC => 'Partage Web (PC)';
+
+  @override
+  String get accessFilesViaAnyBrowser =>
+      'Accédez aux fichiers via n\'importe quel navigateur';
+
+  @override
+  String get allFiles => 'Tous les fichiers';
+
+  @override
+  String get imageCategory => 'Images';
+
+  @override
+  String get musicCategory => 'Musique';
+
+  @override
+  String get videosCategory => 'Vidéos';
+
+  @override
+  String get explorer => 'Explorateur';
+
+  @override
+  String get internalStorage => 'Internal Storage';
+
+  @override
+  String get noTransferHistory => 'Aucun historique de transfert';
+
+  @override
+  String get yourRecentTransfersWillAppearHere =>
+      'Vos transferts récents apparaîtront ici.';
+
+  @override
+  String get clearHistory => 'Effacer l\'historique';
+
+  @override
+  String get thisWillPermanentlyDeleteAllTransferLogs =>
+      'Cette opération supprimera définitivement tous les journaux de transfert.';
+
+  @override
+  String get storagePermissionsAreRequiredToReceiveFiles =>
+      'Des autorisations de stockage sont requises pour recevoir des fichiers.';
+
+  @override
   String get errorGettingLocalIP =>
       'Erreur lors de la récupération de l\'adresse IP locale';
 

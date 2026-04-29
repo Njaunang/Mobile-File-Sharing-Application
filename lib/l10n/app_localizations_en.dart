@@ -254,6 +254,54 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noFilesAddedToWebShareYet => 'No files added to web share yet';
 
   @override
+  String get filesAddedToWebShare => 'files added to Web Share';
+
+  @override
+  String get view => 'VIEW';
+
+  @override
+  String get webSharePC => 'Web Share (PC)';
+
+  @override
+  String get accessFilesViaAnyBrowser => 'Access files via any browser';
+
+  @override
+  String get allFiles => 'All Files';
+
+  @override
+  String get imageCategory => 'Images';
+
+  @override
+  String get musicCategory => 'Music';
+
+  @override
+  String get videosCategory => 'Videos';
+
+  @override
+  String get explorer => 'Explorer';
+
+  @override
+  String get internalStorage => 'Internal Storage';
+
+  @override
+  String get noTransferHistory => 'No Transfer History';
+
+  @override
+  String get yourRecentTransfersWillAppearHere =>
+      'Your recent transfers will appear here';
+
+  @override
+  String get clearHistory => 'Clear History';
+
+  @override
+  String get thisWillPermanentlyDeleteAllTransferLogs =>
+      'This will permanently delete all transfer logs.';
+
+  @override
+  String get storagePermissionsAreRequiredToReceiveFiles =>
+      'Storage permissions are required to receive files.';
+
+  @override
   String get errorGettingLocalIP => 'Error getting local IP';
 
   @override
