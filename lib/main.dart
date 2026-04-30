@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:local_sharer/core/theme/app_theme.dart';
-import 'package:local_sharer/features/home/logic/home_provider.dart';
+import 'package:local_sharer/features/home/logic/storage_provider.dart';
 import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/home/logic/transfer_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
@@ -18,7 +18,7 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HomeProvider()),
+        ChangeNotifierProvider(create: (_) => StorageProvider()),
         ChangeNotifierProvider(create: (_) => ExplorerProvider()),
         ChangeNotifierProvider(create: (_) => HistoryProvider()),
         ChangeNotifierProvider(create: (_) => WebProvider()),

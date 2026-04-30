@@ -6,7 +6,7 @@ import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/explorer/models/file_item.dart';
 import 'package:local_sharer/features/explorer/pages/explorer_page.dart';
 import 'package:local_sharer/features/history/pages/history_page.dart';
-import 'package:local_sharer/features/home/logic/home_provider.dart';
+import 'package:local_sharer/features/home/logic/storage_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
 import 'package:local_sharer/features/home/pages/web_share_page.dart';
 import 'package:local_sharer/features/transfer/pages/receiver_page.dart';
@@ -467,7 +467,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildRecentStorageCard(bool isDark) {
-    final homeProvider = context.watch<HomeProvider>();
+    final homeProvider = context.watch<StorageProvider>();
     final info = homeProvider.storageInfo;
 
     // Percentage for progress bar (0.0 to 1.0)
