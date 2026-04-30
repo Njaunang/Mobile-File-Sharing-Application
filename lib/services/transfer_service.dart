@@ -115,11 +115,7 @@ class TransferService {
     _serverSocket!.listen(_handleIncomingConnection);
 
     _registration = await nsd_plugin.register(
-      nsd_plugin.Service(
-        name: deviceName,
-        type: _serviceType,
-        port: 42360,
-      ),
+      nsd_plugin.Service(name: deviceName, type: _serviceType, port: 42360),
     );
     _log("Broadcasting as $deviceName on port 42360");
   }
@@ -203,18 +199,14 @@ class TransferService {
       // 1. Auth Handshake
       _log("Sending authentication...");
       socket.write(
-        "${jsonEncode({
-              "type": "auth",
-              "username": username,
-              "password": password,
-              "deviceName": deviceName,
-            })}\n",
+        "${jsonEncode({"type": "auth", "username": username, "password": password, "deviceName": deviceName})}\n",
       );
 
       // 2. Wait for Auth Response
       final responseStr = await reader.readLine();
-      if (responseStr == null || responseStr.isEmpty)
+      if (responseStr == null || responseStr.isEmpty) {
         throw Exception("Authentication timeout or empty response.");
+      }
 
       final response = jsonDecode(responseStr);
       if (response["status"] != "success") {
@@ -242,8 +234,9 @@ class TransferService {
 
         // Wait for READY
         final readySignal = await reader.readLine();
-        if (readySignal == null || !readySignal.contains("READY"))
+        if (readySignal == null || !readySignal.contains("READY")) {
           throw Exception("Receiver did not send READY signal.");
+        }
         _log("Receiver is READY, streaming bytes...");
 
         // Stream Bytes
@@ -349,15 +342,17 @@ class TransferService {
 
         await sink.close();
         _log("File $name received and saved.");
-        
+
         // Notify completion
-        _completedController.add(CompletedFile(
-          name: name,
-          path: file.path,
-          size: size,
-          isIncoming: true,
-          peerName: peerName,
-        ));
+        _completedController.add(
+          CompletedFile(
+            name: name,
+            path: file.path,
+            size: size,
+            isIncoming: true,
+            peerName: peerName,
+          ),
+        );
       }
     } catch (e) {
       _log("Receiver error: $e");
@@ -464,4 +459,3 @@ class _SocketReader {
     await _it.cancel();
   }
 }
-

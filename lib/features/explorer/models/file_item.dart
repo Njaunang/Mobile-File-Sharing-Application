@@ -30,24 +30,67 @@ class FileItem {
 
   factory FileItem.fromFileSystemEntity(FileSystemEntity entity) {
     final name = p.basename(entity.path);
-    final stat = entity.statSync();
-    
-    if (entity is Directory) {
+    try {
+      final stat = entity.statSync();
+      if (entity is Directory) {
+        return FileItem(
+          name: name,
+          path: entity.path,
+          size: 0,
+          modified: stat.modified,
+          type: FileType.folder,
+        );
+      } else {
+        final ext = p.extension(entity.path).toLowerCase();
+        return FileItem(
+          name: name,
+          path: entity.path,
+          size: stat.size,
+          modified: stat.modified,
+          type: _getFileType(ext),
+        );
+      }
+    } catch (e) {
+      // Fallback for inaccessible files
       return FileItem(
         name: name,
         path: entity.path,
         size: 0,
-        modified: stat.modified,
-        type: FileType.folder,
+        modified: DateTime.now(),
+        type: entity is Directory ? FileType.folder : FileType.other,
       );
-    } else {
-      final ext = p.extension(entity.path).toLowerCase();
+    }
+  }
+
+  static Future<FileItem> fromFileSystemEntityAsync(FileSystemEntity entity) async {
+    final name = p.basename(entity.path);
+    try {
+      final stat = await entity.stat();
+      if (entity is Directory) {
+        return FileItem(
+          name: name,
+          path: entity.path,
+          size: 0,
+          modified: stat.modified,
+          type: FileType.folder,
+        );
+      } else {
+        final ext = p.extension(entity.path).toLowerCase();
+        return FileItem(
+          name: name,
+          path: entity.path,
+          size: stat.size,
+          modified: stat.modified,
+          type: _getFileType(ext),
+        );
+      }
+    } catch (e) {
       return FileItem(
         name: name,
         path: entity.path,
-        size: stat.size,
-        modified: stat.modified,
-        type: _getFileType(ext),
+        size: 0,
+        modified: DateTime.now(),
+        type: entity is Directory ? FileType.folder : FileType.other,
       );
     }
   }

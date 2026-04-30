@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:local_sharer/features/explorer/pages/private_safe_page.dart';
 
 class ExplorerPage extends StatefulWidget {
   final FileType? initialCategory;
@@ -101,8 +102,9 @@ class _ExplorerPageState extends State<ExplorerPage> {
   }
 
   String _getTitle(ExplorerProvider provider) {
-    if (provider.currentCategory == null)
+    if (provider.currentCategory == null) {
       return AppLocalizations.of(context)!.explorer;
+    }
     switch (provider.currentCategory!) {
       case FileType.image:
         return "Images";
@@ -159,6 +161,12 @@ class _ExplorerPageState extends State<ExplorerPage> {
         'icon': HugeIcons.strokeRoundedFolder01,
         'color': Colors.amber,
       },
+      {
+        'type': FileType.other, // We'll use this for the Safe trigger
+        'label': 'Secure Vault',
+        'icon': HugeIcons.strokeRoundedFolderLocked,
+        'color': Colors.redAccent,
+      },
     ];
 
     return GridView.builder(
@@ -199,7 +207,12 @@ class _ExplorerPageState extends State<ExplorerPage> {
   ) {
     return InkWell(
       onTap: () {
-        if (type == FileType.folder) {
+        if (label == 'Secure Vault') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PrivateSafePage()),
+          );
+        } else if (type == FileType.folder) {
           provider.scanDirectory("/storage/emulated/0");
         } else {
           provider.setCategory(type);
@@ -234,7 +247,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
               label,
               style: GoogleFonts.plusJakartaSans(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 14,
                 color: isDark ? Colors.white : AppColors.textPrimary,
               ),
             ),
@@ -509,6 +522,15 @@ class _ExplorerPageState extends State<ExplorerPage> {
               child: const Text("WEB"),
             ),
             const SizedBox(width: 8),
+            IconButton(
+              onPressed: () => _confirmMoveToSafe(context, provider),
+              icon: const HugeIcon(
+                icon: HugeIcons.strokeRoundedFolderSecurity,
+                color: Colors.white,
+              ),
+              tooltip: AppLocalizations.of(context)!.moveToVault,
+            ),
+            const SizedBox(width: 8),
             ElevatedButton(
               onPressed: () {
                 final files = provider.selectedFiles
@@ -549,5 +571,32 @@ class _ExplorerPageState extends State<ExplorerPage> {
       unitIndex++;
     }
     return "${size.toStringAsFixed(1)} ${suffixes[unitIndex]}";
+  }
+
+  void _confirmMoveToSafe(BuildContext context, ExplorerProvider provider) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.moveToSecureVault),
+        content: Text(
+          AppLocalizations.of(
+            context,
+          )!.selectedFilesWillBeMovedToAPrivateFolderAndHiddenFromOtherApps,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("CANCEL"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              provider.moveToSafe(List.from(provider.selectedFiles));
+              Navigator.pop(context);
+            },
+            child: Text(AppLocalizations.of(context)!.move),
+          ),
+        ],
+      ),
+    );
   }
 }

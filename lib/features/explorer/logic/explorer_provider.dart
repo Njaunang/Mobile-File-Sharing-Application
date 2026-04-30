@@ -48,6 +48,101 @@ class ExplorerProvider extends ChangeNotifier {
     }
   }
 
+  // --- Private Safe Logic ---
+
+  Future<String> _getSafePath() async {
+    final appDir = await getApplicationDocumentsDirectory();
+    final safeDir = Directory(p.join(appDir.path, '.private_safe'));
+    if (!await safeDir.exists()) {
+      await safeDir.create(recursive: true);
+    }
+    return safeDir.path;
+  }
+
+  Future<void> moveToSafe(List<FileItem> items) async {
+    final safePath = await _getSafePath();
+    for (var item in items) {
+      if (item.type == FileType.folder) continue; // Folders not supported yet
+      final file = File(item.path);
+      if (await file.exists()) {
+        final newPath = p.join(safePath, item.name);
+        try {
+          // 'rename' fails across different partitions/mount points (errno 18)
+          // We must copy then delete for reliability.
+          await file.copy(newPath);
+          await file.delete();
+        } catch (e) {
+          debugPrint("Failed to move file to safe: $e");
+        }
+      }
+    }
+    _selectedFiles.clear();
+    // Refresh current view
+    if (_currentCategory != null && _currentCategory != FileType.folder) {
+      await scanCategory(_currentCategory!);
+    } else {
+      await scanDirectory(_currentPath);
+    }
+  }
+
+  Future<void> restoreFromSafe(List<FileItem> items) async {
+    final restorePath = p.join(internalStorageRoot, "Download", "LocalSharer", "Restored");
+    final restoreDir = Directory(restorePath);
+    if (!await restoreDir.exists()) await restoreDir.create(recursive: true);
+
+    for (var item in items) {
+      final file = File(item.path);
+      if (await file.exists()) {
+        final newPath = p.join(restorePath, item.name);
+        try {
+          await file.copy(newPath);
+          await file.delete();
+        } catch (e) {
+          debugPrint("Failed to restore file from safe: $e");
+        }
+      }
+    }
+    _selectedFiles.clear();
+    await scanSafe();
+  }
+
+  Future<void> scanSafe() async {
+    _isLoading = true;
+    // Use a special internal category marker to prevent conflicts
+    _currentCategory = null; 
+    _files.clear();
+    notifyListeners();
+
+    try {
+      final safePath = await _getSafePath();
+      final dir = Directory(safePath);
+      
+      if (!await dir.exists()) {
+        await dir.create(recursive: true);
+      }
+
+      final List<FileSystemEntity> entities = await dir.list().toList();
+      
+      // Filter out any subdirectories or odd entities, we only want the files
+      final List<FileItem> items = [];
+      for (var entity in entities) {
+        if (entity is File) {
+          final item = await FileItem.fromFileSystemEntityAsync(entity);
+          items.add(item);
+        }
+      }
+      
+      _files = items;
+      _files.sort((a, b) => b.modified.compareTo(a.modified));
+      debugPrint("[ExplorerProvider] Safe scanned: Found \${_files.length} files");
+    } catch (e) {
+      debugPrint("[ExplorerProvider] Error scanning safe: $e");
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   void setCategory(FileType? category) {
     _currentCategory = category;
     if (category != null) {

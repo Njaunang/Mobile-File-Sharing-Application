@@ -308,6 +308,98 @@ class AppLocalizationsFr extends AppLocalizations {
       'Des autorisations de stockage sont requises pour recevoir des fichiers.';
 
   @override
+  String get appLock => 'Verrouillage d\'application';
+
+  @override
+  String get requireAuthenticationToOpenApp =>
+      'L\'authentification est requise pour ouvrir l\'application.';
+
+  @override
+  String get biometricUnlock => 'Déverrouillage biométrique';
+
+  @override
+  String get useFingerprintOrFaceRecognition =>
+      'Utiliser la reconnaissance d\'empreintes digitales ou faciale';
+
+  @override
+  String get changeMasterPIN => 'Modifier le code PIN principal';
+
+  @override
+  String get updateYour6digitSecurityCode =>
+      'Mettez à jour votre code de sécurité à 6 chiffres';
+
+  @override
+  String get set6DigitPIN => 'Définissez un code PIN à 6 chiffres';
+
+  @override
+  String get save => 'SAUVEGARDER';
+
+  @override
+  String get cancell => 'ANNULER';
+
+  @override
+  String get locked => 'Fermé';
+
+  @override
+  String get secureVault => 'Coffre-fort sécurisé';
+
+  @override
+  String get moveToSecureVault => 'Déplacer vers le coffre-fort sécurisé';
+
+  @override
+  String get selectedFilesWillBeMovedToAPrivateFolderAndHiddenFromOtherApps =>
+      'Les fichiers sélectionnés seront déplacés vers un dossier privé et masqués aux autres applications.';
+
+  @override
+  String get move => 'DÉPLACER';
+
+  @override
+  String get moveToVault => 'Déplacer vers le coffre-fort';
+
+  @override
+  String get restoreToStorage => 'Restaurer vers le stockage';
+
+  @override
+  String get vaultIsEmpty => 'Le coffre-fort est vide';
+
+  @override
+  String get moveSensitiveFilesHereToProtectThem =>
+      'Déplacez ici les fichiers sensibles pour les protéger.';
+
+  @override
+  String get filesBackToPublicStorage =>
+      'Les fichiers sont renvoyés au stockage public.';
+
+  @override
+  String get moves => 'déplacer';
+
+  @override
+  String get restore => 'RESTAURER';
+
+  @override
+  String get restoreFiles => 'Restaurer des fichiers';
+
+  @override
+  String get enterYour6digitPINToUnlock =>
+      'Saisissez votre code PIN à 6 chiffres pour déverrouiller';
+
+  @override
+  String get authenticateToAccessLocalSharer =>
+      'Authentifiez-vous pour accéder à Local Sharer';
+
+  @override
+  String get english => 'Anglais';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get language => 'Langue';
+
+  @override
+  String get security => 'Sécurité';
+
+  @override
   String get errorGettingLocalIP =>
       'Erreur lors de la récupération de l\'adresse IP locale';
 

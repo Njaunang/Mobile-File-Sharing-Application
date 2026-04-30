@@ -38,6 +38,12 @@ The application features a complete redesign with a focus on professional aesthe
 - **Timeline UI:** Beautifully organized history with timestamps, file sizes, and status.
 - **Instant Access:** Open received files directly from the history page using `open_filex`.
 
+### 5. 🔐 Biometric Security
+- **App-Wide Protection:** Lock the entire application with Fingerprint, Face ID, or a 6-digit Master PIN.
+- **Secure Vault (Private Safe):** A hidden, encrypted section in the explorer to store sensitive files. Files moved here are isolated from other apps.
+- **Automatic Auto-Lock:** The app automatically locks when moved to the background or minimized.
+- **Customizable Logic:** Toggle between biometric and PIN authentication in the settings.
+
 ---
 
 ## 📖 Usage Guide
@@ -61,35 +67,7 @@ The application features a complete redesign with a focus on professional aesthe
 
 To take **Local Sharer** even further, we are looking at the following improvements:
 
-## 3. 🔐 Biometric Security
-
-Implement advanced security with biometric authentication.
-
-Add:
-
-* app lock with fingerprint  where available
-* Face ID support where available
-* PIN Code where available
-* folder-level protection
-* secure authentication before access to sensitive folders
-* note user can choose his lock method he can choose fingerprint, face id, or pin code
-
-Requirements:
-
-* use secure Flutter packages
-* store security preferences safely
-* avoid bypass vulnerabilities
-* include fallback PIN / password option
-
-Focus strongly on:
-
-* security best practices
-* future-proof code
-* maintainable authentication architecture
-
----
-
-## 4. 📦 Smart Compression
+## . 📦 Smart Compression
 
 Implement automatic compression for large folders before transfer.
 
@@ -107,27 +85,6 @@ Please ensure:
 * asynchronous background processing
 * memory-efficient compression logic
 * strong error handling
-
----
-
-## 5. 👥 Group Sharing
-
-Implement support for sending files to **multiple devices simultaneously**.
-
-Features:
-
-* discover multiple devices on same network
-* multi-device selection UI
-* send one file to many devices at once
-* parallel transfer processing
-* individual progress per device
-
-Important:
-
-* excellent backend concurrency management
-* no race conditions
-* no duplicate packet issues
-* scalable architecture
 
 ---
 
@@ -192,7 +149,7 @@ Please structure the code professionally with clear separation of:
 * storage
 * security
 
-and include explanations of the architecture choices. **👥 Group Sharing:** Support for sending files to multiple devices simultaneously.
+
 
 ---
 

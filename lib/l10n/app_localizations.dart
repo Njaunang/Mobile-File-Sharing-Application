@@ -668,6 +668,174 @@ abstract class AppLocalizations {
   /// **'Storage permissions are required to receive files.'**
   String get storagePermissionsAreRequiredToReceiveFiles;
 
+  /// No description provided for @appLock.
+  ///
+  /// In en, this message translates to:
+  /// **'App Lock'**
+  String get appLock;
+
+  /// No description provided for @requireAuthenticationToOpenApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Require authentication to open app'**
+  String get requireAuthenticationToOpenApp;
+
+  /// No description provided for @biometricUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric Unlock'**
+  String get biometricUnlock;
+
+  /// No description provided for @useFingerprintOrFaceRecognition.
+  ///
+  /// In en, this message translates to:
+  /// **'Use fingerprint or face recognition'**
+  String get useFingerprintOrFaceRecognition;
+
+  /// No description provided for @changeMasterPIN.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Master PIN'**
+  String get changeMasterPIN;
+
+  /// No description provided for @updateYour6digitSecurityCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your 6-digit security code'**
+  String get updateYour6digitSecurityCode;
+
+  /// No description provided for @set6DigitPIN.
+  ///
+  /// In en, this message translates to:
+  /// **'Set 6-Digit PIN'**
+  String get set6DigitPIN;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'SAVE'**
+  String get save;
+
+  /// No description provided for @cancell.
+  ///
+  /// In en, this message translates to:
+  /// **'CANCEL'**
+  String get cancell;
+
+  /// No description provided for @locked.
+  ///
+  /// In en, this message translates to:
+  /// **'Locked'**
+  String get locked;
+
+  /// No description provided for @secureVault.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure Vault'**
+  String get secureVault;
+
+  /// No description provided for @moveToSecureVault.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to Secure Vault'**
+  String get moveToSecureVault;
+
+  /// No description provided for @selectedFilesWillBeMovedToAPrivateFolderAndHiddenFromOtherApps.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected files will be moved to a private folder and hidden from other apps.'**
+  String get selectedFilesWillBeMovedToAPrivateFolderAndHiddenFromOtherApps;
+
+  /// No description provided for @move.
+  ///
+  /// In en, this message translates to:
+  /// **'MOVE'**
+  String get move;
+
+  /// No description provided for @moveToVault.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to Vault'**
+  String get moveToVault;
+
+  /// No description provided for @restoreToStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore to Storage'**
+  String get restoreToStorage;
+
+  /// No description provided for @vaultIsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Vault is Empty'**
+  String get vaultIsEmpty;
+
+  /// No description provided for @moveSensitiveFilesHereToProtectThem.
+  ///
+  /// In en, this message translates to:
+  /// **'Move sensitive files here to protect them'**
+  String get moveSensitiveFilesHereToProtectThem;
+
+  /// No description provided for @filesBackToPublicStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'files back to public storage'**
+  String get filesBackToPublicStorage;
+
+  /// No description provided for @moves.
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get moves;
+
+  /// No description provided for @restore.
+  ///
+  /// In en, this message translates to:
+  /// **'RESTORE'**
+  String get restore;
+
+  /// No description provided for @restoreFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Files'**
+  String get restoreFiles;
+
+  /// No description provided for @enterYour6digitPINToUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your 6-digit PIN to unlock'**
+  String get enterYour6digitPINToUnlock;
+
+  /// No description provided for @authenticateToAccessLocalSharer.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticate to access Local Sharer'**
+  String get authenticateToAccessLocalSharer;
+
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @french.
+  ///
+  /// In en, this message translates to:
+  /// **'Français'**
+  String get french;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @security.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get security;
+
   /// No description provided for @errorGettingLocalIP.
   ///
   /// In en, this message translates to:

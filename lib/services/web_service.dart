@@ -12,7 +12,7 @@ class WebService {
   String _pin = '';
 
   // List of files to share: Map<String, File> where key is a unique ID
-  Map<String, File> _sharedFiles = {};
+  final Map<String, File> _sharedFiles = {};
 
   bool get isRunning => _isRunning;
   String get address => 'http://$_ip:$_port';
@@ -172,8 +172,9 @@ class WebService {
 
   String _getFileType(String path) {
     final ext = p.extension(path).toLowerCase();
-    if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].contains(ext))
+    if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].contains(ext)) {
       return 'image';
+    }
     if (['.mp4', '.mkv', '.mov', '.avi'].contains(ext)) return 'video';
     if (['.mp3', '.wav', '.m4a'].contains(ext)) return 'audio';
     if (['.pdf', '.doc', '.docx', '.txt'].contains(ext)) return 'document';

@@ -302,6 +302,96 @@ class AppLocalizationsEn extends AppLocalizations {
       'Storage permissions are required to receive files.';
 
   @override
+  String get appLock => 'App Lock';
+
+  @override
+  String get requireAuthenticationToOpenApp =>
+      'Require authentication to open app';
+
+  @override
+  String get biometricUnlock => 'Biometric Unlock';
+
+  @override
+  String get useFingerprintOrFaceRecognition =>
+      'Use fingerprint or face recognition';
+
+  @override
+  String get changeMasterPIN => 'Change Master PIN';
+
+  @override
+  String get updateYour6digitSecurityCode =>
+      'Update your 6-digit security code';
+
+  @override
+  String get set6DigitPIN => 'Set 6-Digit PIN';
+
+  @override
+  String get save => 'SAVE';
+
+  @override
+  String get cancell => 'CANCEL';
+
+  @override
+  String get locked => 'Locked';
+
+  @override
+  String get secureVault => 'Secure Vault';
+
+  @override
+  String get moveToSecureVault => 'Move to Secure Vault';
+
+  @override
+  String get selectedFilesWillBeMovedToAPrivateFolderAndHiddenFromOtherApps =>
+      'Selected files will be moved to a private folder and hidden from other apps.';
+
+  @override
+  String get move => 'MOVE';
+
+  @override
+  String get moveToVault => 'Move to Vault';
+
+  @override
+  String get restoreToStorage => 'Restore to Storage';
+
+  @override
+  String get vaultIsEmpty => 'Vault is Empty';
+
+  @override
+  String get moveSensitiveFilesHereToProtectThem =>
+      'Move sensitive files here to protect them';
+
+  @override
+  String get filesBackToPublicStorage => 'files back to public storage';
+
+  @override
+  String get moves => 'Move';
+
+  @override
+  String get restore => 'RESTORE';
+
+  @override
+  String get restoreFiles => 'Restore Files';
+
+  @override
+  String get enterYour6digitPINToUnlock => 'Enter your 6-digit PIN to unlock';
+
+  @override
+  String get authenticateToAccessLocalSharer =>
+      'Authenticate to access Local Sharer';
+
+  @override
+  String get english => 'English';
+
+  @override
+  String get french => 'Français';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get security => 'Security';
+
+  @override
   String get errorGettingLocalIP => 'Error getting local IP';
 
   @override

@@ -6,6 +6,8 @@ import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/home/logic/transfer_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
 import 'package:local_sharer/features/history/logic/history_provider.dart';
+import 'package:local_sharer/features/security/logic/security_provider.dart';
+import 'package:local_sharer/features/security/pages/lock_screen.dart';
 import 'package:local_sharer/features/home/pages/dashboard_page.dart';
 import 'package:local_sharer/l10n/app_localizations.dart';
 import 'package:local_sharer/providers/locale_provider.dart';
@@ -20,6 +22,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ExplorerProvider()),
         ChangeNotifierProvider(create: (_) => HistoryProvider()),
         ChangeNotifierProvider(create: (_) => WebProvider()),
+        ChangeNotifierProvider(create: (_) => SecurityProvider()),
         ChangeNotifierProxyProvider<HistoryProvider, TransferProvider>(
           create: (_) => TransferProvider(),
           update: (_, history, transfer) =>
@@ -54,10 +57,22 @@ class MainApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: [
-              Locale('en'), // French
-              Locale('fr'), // English
+              Locale('en'), // English
+              Locale('fr'), // French
             ],
-            home: const DashboardPage(),
+            home: Consumer<SecurityProvider>(
+              builder: (context, securityProvider, child) {
+                if (securityProvider.isLoading) {
+                  return const Scaffold(
+                    body: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                if (securityProvider.isLocked) {
+                  return const LockScreen();
+                }
+                return const DashboardPage();
+              },
+            ),
           );
         },
       ),

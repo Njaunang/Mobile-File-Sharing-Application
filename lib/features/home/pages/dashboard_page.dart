@@ -6,10 +6,10 @@ import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/explorer/models/file_item.dart';
 import 'package:local_sharer/features/explorer/pages/explorer_page.dart';
 import 'package:local_sharer/features/history/pages/history_page.dart';
-import 'package:local_sharer/features/home/logic/home_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
 import 'package:local_sharer/features/home/pages/web_share_page.dart';
 import 'package:local_sharer/features/transfer/pages/receiver_page.dart';
+import 'package:local_sharer/features/security/pages/security_settings_widget.dart';
 import 'package:local_sharer/l10n/app_localizations.dart';
 import 'package:local_sharer/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +64,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   _buildWebShareCard(isDark),
                   const SizedBox(height: 16),
                   _buildRecentStorageCard(isDark),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 100), // Space for FAB
                 ],
               ),
             ),
@@ -89,11 +89,11 @@ class _DashboardPageState extends State<DashboardPage> {
           children: [
             Image.asset(
               'assets/icons/icon.png',
-              width: 20,
-              height: 20,
+              width: 24,
+              height: 24,
               fit: BoxFit.cover,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               "Local Sharer",
               style: GoogleFonts.plusJakartaSans(
@@ -107,9 +107,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       actions: [
         IconButton(
-          onPressed: () {
-            showSeetingModal();
-          },
+          onPressed: () => showSettingsModal(),
           icon: const HugeIcon(
             icon: HugeIcons.strokeRoundedSettings02,
             color: AppColors.primary,
@@ -132,13 +130,6 @@ class _DashboardPageState extends State<DashboardPage> {
             MaterialPageRoute(builder: (context) => const HistoryPage()),
           ),
         ),
-        // const SizedBox(width: 12),
-        // _quickActionCard(
-        //   AppLocalizations.of(context)!.received,
-        //   HugeIcons.strokeRoundedDownload02,
-        //   AppColors.secondary,
-        //   () {}, // TODO: Implement Received files shortcut
-        // ),
       ],
     ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0);
   }
@@ -368,7 +359,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         : AppLocalizations.of(
                             context,
                           )!.accessFilesViaAnyBrowser,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: AppColors.textSecondary,
                       fontSize: 12,
                     ),
@@ -389,16 +380,17 @@ class _DashboardPageState extends State<DashboardPage> {
     ).animate().fadeIn(delay: 500.ms);
   }
 
-  void showSeetingModal() {
+  void showSettingsModal() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+          color: isDark ? AppColors.slate : Colors.white,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -414,7 +406,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Text(
               AppLocalizations.of(context)!.settings,
               style: GoogleFonts.plusJakartaSans(
@@ -423,183 +415,53 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             const SizedBox(height: 24),
-            Consumer<LocaleProvider>(
-              builder: (context, localeProvider, child) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          localeProvider.setLocale(Locale('en'));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            color: localeProvider.locale.languageCode == 'en'
-                                ? AppColors.primary
-                                : AppColors.surface,
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: Text(
-                            'EN',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          localeProvider.setLocale(Locale('fr'));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            color: localeProvider.locale.languageCode == 'fr'
-                                ? AppColors.primary
-                                : AppColors.surface,
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: Text(
-                            'FR',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showConnectionGuide(HomeProvider provider) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(24),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
+            const SecuritySettingsWidget(),
+            const Divider(height: 40),
             Text(
-              "Connection Guide",
+              AppLocalizations.of(context)!.language,
               style: GoogleFonts.plusJakartaSans(
-                fontSize: 20,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16),
-            _guideStep(1, "Ensure PC and Phone are on the same Wi-Fi network."),
-            _guideStep(2, "On your PC, open File Explorer or WinSCP."),
-            _guideStep(3, "Type the address: ftp://${provider.serverAddress}"),
-            _guideStep(4, "When prompted, enter:"),
-            Padding(
-              padding: const EdgeInsets.only(left: 48, top: 8),
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
+            const SizedBox(height: 8),
+            Consumer<LocaleProvider>(
+              builder: (context, localeProvider, child) {
+                return Row(
                   children: [
-                    _infoRow("Username", provider.username),
-                    const Divider(),
-                    _infoRow("Password", provider.password),
+                    _langChip(
+                      localeProvider,
+                      'en',
+                      AppLocalizations.of(context)!.english,
+                    ),
+                    const SizedBox(width: 12),
+                    _langChip(
+                      localeProvider,
+                      'fr',
+                      AppLocalizations.of(context)!.french,
+                    ),
                   ],
-                ),
-              ),
+                );
+              },
             ),
-            const SizedBox(height: 32),
-            SizedBox(
-              width: double.infinity,
-              height: 56,
-              child: ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text("GOT IT"),
-              ),
-            ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
           ],
         ),
       ),
     );
   }
 
-  Widget _guideStep(int number, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            radius: 12,
-            backgroundColor: AppColors.primary,
-            child: Text(
-              number.toString(),
-              style: const TextStyle(color: Colors.white, fontSize: 12),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 14, height: 1.4),
-            ),
-          ),
-        ],
+  Widget _langChip(LocaleProvider provider, String code, String label) {
+    bool isSelected = provider.locale.languageCode == code;
+    return ChoiceChip(
+      label: Text(label),
+      selected: isSelected,
+      onSelected: (_) => provider.setLocale(Locale(code)),
+      selectedColor: AppColors.primary,
+      labelStyle: TextStyle(
+        color: isSelected ? Colors.white : Colors.black,
+        fontWeight: FontWeight.bold,
       ),
-    );
-  }
-
-  Widget _infoRow(String label, String value) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
-        ),
-        Text(value, style: const TextStyle(fontWeight: FontWeight.bold)),
-      ],
     );
   }
 

@@ -109,7 +109,7 @@ class WebSharePage extends StatelessWidget {
               ),
               Switch(
                 value: provider.isRunning,
-                activeColor: AppColors.primary,
+                activeThumbColor: AppColors.primary,
                 onChanged: (val) {
                   if (!provider.isRunning && provider.basketFiles.isEmpty) {
                     _showNoFilesToast();

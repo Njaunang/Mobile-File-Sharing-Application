@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:local_sharer/features/history/models/transfer_history.dart';
@@ -25,7 +24,7 @@ class HistoryProvider extends ChangeNotifier {
       _history = historyJson
           .map((item) => TransferHistoryItem.fromJson(item))
           .toList();
-      
+
       // Sort by newest first
       _history.sort((a, b) => b.timestamp.compareTo(a.timestamp));
     } catch (e) {
