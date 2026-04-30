@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:local_sharer/services/ftp_service.dart';
+import 'package:local_sharer/services/storage_service.dart';
 
 class HomeProvider extends ChangeNotifier {
   final FtpService _ftpService = FtpService();
+  final StorageService _storageService = StorageService();
+  
   bool _isLoading = false;
   final List<LogEntry> _logs = [];
   StreamSubscription<LogEntry>? _logSubscription;
+  StorageInfo? _storageInfo;
 
   // Getters
   bool get isRunning => _ftpService.isRunning;
@@ -15,6 +19,7 @@ class HomeProvider extends ChangeNotifier {
   String get serverAddress => _ftpService.serverAddress;
   String get username => _ftpService.username;
   String get password => _ftpService.password;
+  StorageInfo? get storageInfo => _storageInfo;
 
   HomeProvider() {
     // Listen to logs from the service
@@ -23,6 +28,12 @@ class HomeProvider extends ChangeNotifier {
       if (_logs.length > 100) _logs.removeAt(0);
       notifyListeners();
     });
+    refreshStorageInfo();
+  }
+
+  Future<void> refreshStorageInfo() async {
+    _storageInfo = await _storageService.getStorageInfo();
+    notifyListeners();
   }
 
   Future<void> toggleServer() async {

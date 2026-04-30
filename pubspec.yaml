@@ -24,6 +24,7 @@ dependencies:
   local_auth: ^2.3.0
   flutter_secure_storage: ^9.2.4
   crypto: ^3.0.6
+  storage_space: ^1.0.1
   
   # State & UI
   provider: ^6.1.2

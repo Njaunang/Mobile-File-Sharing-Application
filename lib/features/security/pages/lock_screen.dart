@@ -86,6 +86,7 @@ class _LockScreenState extends State<LockScreen> {
             ),
             const SizedBox(height: 8),
             Text(
+              textAlign: TextAlign.center,
               AppLocalizations.of(context)!.enterYour6digitPINToUnlock,
               style: TextStyle(color: AppColors.textSecondary),
             ),

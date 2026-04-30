@@ -6,6 +6,7 @@ import 'package:local_sharer/features/explorer/logic/explorer_provider.dart';
 import 'package:local_sharer/features/explorer/models/file_item.dart';
 import 'package:local_sharer/features/explorer/pages/explorer_page.dart';
 import 'package:local_sharer/features/history/pages/history_page.dart';
+import 'package:local_sharer/features/home/logic/home_provider.dart';
 import 'package:local_sharer/features/home/logic/web_provider.dart';
 import 'package:local_sharer/features/home/pages/web_share_page.dart';
 import 'package:local_sharer/features/transfer/pages/receiver_page.dart';
@@ -466,6 +467,14 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildRecentStorageCard(bool isDark) {
+    final homeProvider = context.watch<HomeProvider>();
+    final info = homeProvider.storageInfo;
+
+    // Percentage for progress bar (0.0 to 1.0)
+    final percentage = info?.usedPercentage ?? 0.0;
+    // Display percentage (e.g. 85%)
+    final displayPercentage = (percentage * 100).toStringAsFixed(0);
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -490,9 +499,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
               const Spacer(),
-              const Text(
-                "85%",
-                style: TextStyle(
+              Text(
+                "$displayPercentage%",
+                style: const TextStyle(
                   fontWeight: FontWeight.w900,
                   color: AppColors.primary,
                 ),
@@ -502,19 +511,27 @@ class _DashboardPageState extends State<DashboardPage> {
           const SizedBox(height: 16),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: const LinearProgressIndicator(
-              value: 0.85,
+            child: LinearProgressIndicator(
+              value: percentage,
               minHeight: 8,
               backgroundColor: AppColors.background,
-              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                AppColors.primary,
+              ),
             ),
           ),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _storageDetail("110.5 GB", AppLocalizations.of(context)!.used),
-              _storageDetail("128 GB", AppLocalizations.of(context)!.total),
+              _storageDetail(
+                info?.usedSize ?? "0 GB",
+                AppLocalizations.of(context)!.used,
+              ),
+              _storageDetail(
+                info?.totalSize ?? "0 GB",
+                AppLocalizations.of(context)!.total,
+              ),
             ],
           ),
         ],
